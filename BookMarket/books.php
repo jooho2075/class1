@@ -65,7 +65,7 @@
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>               
             </div>
-         </div>
+        </div>
     </nav>
 </header>
 
@@ -74,6 +74,7 @@
      $tagline = "Welcome to Web Market!";
 ?>  
 <br>
+
  <main > 
     <div class="container py-5">
         
@@ -87,26 +88,28 @@
         <div class="row align-items-md-stretch text-center">
           <?php
           for($i = 0; $i < 3; $i++) {
-          $id = "ISBN". (1234+$i);
+            $id = "ISBN" . (1234+$i);
           ?>
             <div class="col-md-4">
-              <div class="h-100 p-5">
-                <h2><?php echo $BookArray[$id]["name"]; ?></h2>
-                <P><?php echo $BookArray[$id]["author"]. " | ".$BookArray[$id]["releaseDate"];?></p>
-                <p><?= mb_substr($BookArray[$id]["description"], 0, 90, 'utf-8'). "..."; ?></p>
-                <p><?= $BookArray[$id]["unitPrice"]; ?>원</p>
+                <div class="h-100 p-5">
+                    <h2><?php echo $BookArray[$id]["name"]; ?></h2>
+                    <P><?php echo $BookArray[$id]["author"]. " | ".$BookArray[$id]["releaseDate"]; ?></p>
+                    <p><?= mb_substr($BookArray[$id]["description"], 0, 90, 'utf-8'). "..."; ?></p>
+                    <p><?= $BookArray[$id]["unitPrice"]; ?>원</p>
+                </div>
             </div>
           <?php
             }
           ?>
         </div>
-
+        <!--
         <div class="row">
             <div class="col-6" style="border:1px solid red">Col-1</div>
             <div class="col-3" style="border:1px solid red">Col-2</div>
             <div class="col-3" style="border:1px solid red">Col-3</div>
         </div>
     </div>
+        -->
 </main>
 
 <footer class="footer mt-auto py-3 bg-body-tertiary">
