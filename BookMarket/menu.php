@@ -21,6 +21,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="./books.php">Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./addBook.php">도서 등록</a>
                     </li>                                           
                 </ul>
                 <form class="d-flex" role="search">

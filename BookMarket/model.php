@@ -30,4 +30,27 @@
     global $BookArray;
     return $BookArray;
   }
+
+  function getBookById($id) {
+    global $BookArray, $bookById;
+    for($i = 0; $i < count($BookArray); $i++) {
+      if(array_key_exists($id, $BookArray)) {
+        $bookById = $BookArray[$id];
+        break;
+      }
+    }
+    return $bookById;
+  }
+
+  function addBook($id) {
+    global $BookArray;
+    $BookArray[$bookId]["name"] = $nbook["name"];
+    $BookArray[$bookId]["unitPrice"] = $nbook["unitPrice"];
+    $BookArray[$bookId]["author"] = $nbook["author"];
+    $BookArray[$bookId]["description"] = $nbook["description"];
+    $BookArray[$bookId]["category"] = $nbook["category"];
+    $BookArray[$bookId]["unitsInStock"] = $nbook["unitsInStock"];
+    $BookArray[$bookId]["releaseDate"] = $nbook["releaseDate"];
+    $BookArray[$bookId]["condition"] = $nbook["condition"];
+  }
 ?>

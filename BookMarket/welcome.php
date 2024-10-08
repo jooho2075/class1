@@ -9,7 +9,7 @@
 <body class="d-flex flex-column h-100">
 
 <?php
-require "./menu.php";
+    require "./menu.php";
 ?>
 
 <?php
@@ -54,7 +54,7 @@ require "./menu.php";
 </main>
 
 <?php
-require "./footer.php";
+    require "./footer.php";
 ?>
 </body>
 </html>
