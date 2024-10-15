@@ -42,7 +42,7 @@
     return $bookById;
   }
 
-  function addBook($id) {
+  function addBook($bookId, $nbook) {
     global $BookArray;
     $BookArray[$bookId]["name"] = $nbook["name"];
     $BookArray[$bookId]["unitPrice"] = $nbook["unitPrice"];

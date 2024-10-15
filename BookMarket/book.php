@@ -36,7 +36,10 @@
                         <p><b>분류</b> : <?php echo $book["category"];?></p>
                         <p><b>재고</b> : <?php echo $book["unitsInStock"];?></p>
                         <p><?php echo $book["unitPrice"]; ?>원</p>
-                        <p><a href="#" class="btn btn-info">도서주문 &raquo;</a><a href="./books.php" class="btn btn-secondary">도서목록 &raquo;</a></p>
+                        <p>
+                            <a href="#" class="btn btn-info">도서주문 &raquo;</a>
+                            <a href="./books.php" class="btn btn-secondary">도서목록 &raquo;</a>
+                        </p>
                     </div>
                 </div>
             </div>

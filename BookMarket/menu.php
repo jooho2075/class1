@@ -20,7 +20,7 @@
                         <a class="nav-link active" aria-current="page" href="./welcome.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="./books.php">Books</a>
+                        <a class="nav-link active" aria-current="page" href="./books.php">도서 목록</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="./addBook.php">도서 등록</a>

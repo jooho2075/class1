@@ -17,7 +17,7 @@
             <div class="p-5 mb-4 bg-body-tertiary rounded-3">
                 <div class="container-fluid py-5">
                     <h1 class="display-5 fw-bold">도서 등록</h1>
-                    <p class="col-md-8 fs-4">Book Addition</p>
+                    <p class="col-md-8 fs-4">Add Book</p>
                 </div>
             </div>
             <div class="row align-items-md-stretch">
@@ -37,13 +37,13 @@
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label class="col-sm-3">가격</label>
+                                <label class="col-sm-2">가격</label>
                                 <div class="col-sm-3">
                                     <input type="text" name="unitPrice" class="form-control">
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label class="col-sm-3">저자</label>
+                                <label class="col-sm-2">저자</label>
                                 <div class="col-sm-3">
                                     <input type="text" name="author" class="form-control">
                                 </div>
@@ -51,7 +51,7 @@
                             <div class="mb-3 row">
                                 <label class="col-sm-2">상세정보</label>
                                 <div class="col-sm-5">
-                                    <textarea name="description" cols="50" rows="2" class="form-control" placeholder="100자 이상 적어주세요"></textarea>
+                                    <textarea name="description" cols="50" rows="5" class="form-control" placeholder="100자 이상 적어주세요"></textarea>
                                 </div>
                             </div>
                             <div class="mb-3 row">
@@ -76,8 +76,8 @@
                                 <label class="col-sm-2">상태</label>
                                 <div class="col-sm-5">
                                     <input type="radio" name="condition" value="New" checked> 신규도서
-                                    <input type="radio" name="condition" value="Old" checked> 중고도서
-                                    <input type="radio" name="condition" value="EBook" checked> E-Book
+                                    <input type="radio" name="condition" value="Old"> 중고도서
+                                    <input type="radio" name="condition" value="EBook"> E-Book
                                 </div>
                             </div>
                             <div class="mb-3 row">

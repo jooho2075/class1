@@ -22,6 +22,7 @@
             </div>
             <div class="row align-items-md-stretch text-center">
                 <?php
+                    // new book 추가 isset()
                     $bookId = $_POST["bookId"];
                     $name = $_POST["name"];
                     $unitPrice = $_POST["unitPrice"];
@@ -31,19 +32,20 @@
                     $unitsInStock = $_POST["unitsInStock"];
                     $releaseDate = $_POST["releaseDate"];
                     $condition = $_POST["condition"];
-                    $newBook["name"] = "name";
-                    $newBook["unitPrice"] = "unitPrice";
-                    $newBook["author"] = "author";
-                    $newBook["description"] = "description";
-                    $newBook["category"] = "category";
-                    $newBook["unitsInStock"] = "unitsInStock";
-                    $newBook["releaseDate"] = "releaseDate";
-                    $newBook["condition"] = "condition";
+
+                    $newBook["name"] = $name;
+                    $newBook["unitPrice"] = $unitPrice;
+                    $newBook["author"] = $author;
+                    $newBook["description"] = $description;
+                    $newBook["category"] = $category;
+                    $newBook["unitsInStock"] = $unitsInStock;
+                    $newBook["releaseDate"] = $releaseDate;
+                    $newBook["condition"] = $condition;
 
                     addBook($bookId, $newBook);
 
                     $listOfBooks = getAllBooks();
-                    for($i = 0; i < count($listOfBooks); $i++) {
+                    for($i = 0; $i < count($listOfBooks); $i++) {
                         $id = key($listOfBooks);
                         $book = $listOfBooks[$id];
                         next($listOfBooks);
@@ -52,7 +54,7 @@
                         <div class="h-100 p-5">
                             <h2><?php echo $book["name"]; ?></h2>
                             <p><?php echo $book["author"]. " | " .$book["releaseDate"]; ?></p>
-                            <p><?php echo mb-substr($book["description"], 0, 90, 'utf-8') ."..."; ?></p>
+                            <p><?php echo mb_substr($book["description"], 0, 90, 'utf-8') ."..."; ?></p>
                             <p><?php echo $book["unitPrice"]; ?>원</p>
                             <p><a href="./book.php?id=<?php echo $id; ?>"><button class="btn btn-outline-secondary" type="button">상세정보</button></a></p>
                         </div>
@@ -64,7 +66,7 @@
         </div>
     </main>
     <?php
-        require ".footer.php";
+        require "./footer.php";
     ?>
 </body>
 </html>
