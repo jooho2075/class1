@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!-- 신규 도서 등록 처리 페이지-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,7 +23,9 @@
             <div class="row align-items-md-stretch text-center">
                 <?php
                     // new book 추가 isset()
-                    $bookId = $_POST["bookId"];
+                    // 28~36 : 폼 페이지에서 입력된 값을 얻어오도록 요청 파라미터명(bookId, name, unitPrice...)으로
+                    // $_POST 전역변수를 사용해서 작성)
+                    $bookId = $_POST["bookId"];  
                     $name = $_POST["name"];
                     $unitPrice = $_POST["unitPrice"];
                     $author = $_POST["author"];
@@ -33,6 +35,7 @@
                     $releaseDate = $_POST["releaseDate"];
                     $condition = $_POST["condition"];
 
+                    // 39~46 : 폼 페이지에서 입력받은 값을 배열 변수 $newBook에 저장
                     $newBook["name"] = $name;
                     $newBook["unitPrice"] = $unitPrice;
                     $newBook["author"] = $author;
@@ -42,10 +45,10 @@
                     $newBook["releaseDate"] = $releaseDate;
                     $newBook["condition"] = $condition;
 
-                    addBook($bookId, $newBook);
+                    addBook($bookId, $newBook); // 폼 페이지에서 입력된 데이터를 전역변수에 저장하도록 model.php 파일의 addBook()함수 호출
 
-                    $listOfBooks = getAllBooks();
-                    for($i = 0; $i < count($listOfBooks); $i++) {
+                    $listOfBooks = getAllBooks(); // model.php파일의 getAllBooks()함수를 호출해 도서목록 가져옴
+                    for($i = 0; $i < count($listOfBooks); $i++) { // 51~66 : 도서 목록 출력
                         $id = key($listOfBooks);
                         $book = $listOfBooks[$id];
                         next($listOfBooks);

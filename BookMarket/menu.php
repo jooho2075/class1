@@ -1,4 +1,4 @@
-<header>
+<header> <!--menu.php가 머리글 부분-->
   <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
@@ -20,10 +20,10 @@
                         <a class="nav-link active" aria-current="page" href="./welcome.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="./books.php">도서 목록</a>
+                        <a class="nav-link active" aria-current="page" href="./books.php">도서 목록</a> <!--도서목록 페이지를 표시하도록 도서목록 메뉴 추가 작성-->
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="./addBook.php">도서 등록</a>
+                        <a class="nav-link active" aria-current="page" href="./addBook.php">도서 등록</a> <!--도서등록 페이지를 표시하도록 도서등록 메뉴 추가 작성-->
                     </li>                                           
                 </ul>
                 <form class="d-flex" role="search">
