@@ -401,31 +401,35 @@
     <h1>프로젝트 만드는 순서</h1>
     <p>
         <ol>
-            <li>htdocs에 폴더 만들기</li>
-            <li>부트스트랩 / 폰트어썸 적용</li>
-            <li>현재시간 적용하기(tagline아래쪽에) // header("Refresh:5") 웹 페이지가 일정 시간 이후에 자동으로 새로고침 되도록 하는 함수</li>
-            <li>도서목록 만들기(2차원 배열로 / books.php에서 배열 부분 가져오기) -> welcome에서 link,script태그 가져오기</li>
-            <li>모듈화</li>
+            <li>Chapter1. htdocs에 폴더 만들기</li>
+            <li>Chapter2. 시작페이지(welcome.php)만들기 => 부트스트랩 / 폰트어썸 적용</li>
+            <li>Chapter3. 현재시간 적용하기(welcome.php파일 / tagline아래쪽에) // header("Refresh:5") 웹 페이지가 일정 시간 이후에 자동으로 새로고침 되도록 하는 함수</li>
+            <li>Chapter4. 도서목록 만들기(2차원 배열로 / books.php에서 배열 부분 가져오기)
+                ->books.php에 도서 목록 출력페이지 만들기, 도서 상세설명 요약 표시 작성하기
+                -> welcome에서 link,script태그 가져오기
+            </li>
+            <li>Chapter5. 모듈화</li>
                 <ul>
-                    <li>menu.php파일 만들기 : welcome.php에서 header부분 가져오기</li>
-                    <li>footer.php만들기 : welcome.php에서 footer부분 가져오기</li>
-                    <li>model.php만들기 : books.php의 배열 부분 가져오기</li>
-                    <li>books.php에 require model,menu(body태그 뒤) // require footer해주기(main태그 뒤)</li>
-                    <li>model.php에 도서목록 가져오는 함수 정의하기</li>
-                    <li>books.php에 도서목록 호출하는 함수 정의하기</li>
+                    <li>menu.php(머리글)파일 만들기 : welcome.php에서 header부분 가져오기</li>
+                    <li>footer.php(바닥글)만들기 : welcome.php에서 footer부분 가져오기</li>
+                    <li>시작페이지(welcome.php) 모듈화하기</li>
+                    <li>model.php만들기 : 도서 데이터를 저장 관리하는 php페이지 작성 / books.php의 배열 부분 가져오기</li>
+                    <li>books.php(모듈화)에 require model,menu(body태그 뒤) // require footer해주기(main태그 뒤)</li>
+                    <li>model.php에 도서목록 가져오는 함수(getAllBooks()) 정의하기</li>
+                    <li>books.php에 도서목록 호출하는 함수(listOfBooks부분 확인하기) 정의하기</li>
                     <li>welcome.php에서 접속일시를 한국으로 맞춰주기</li>
                 </ul>
-            <li>GET&POST해주기</li>
+            <li>Chapter6. GET&POST해주기</li>
                 <ul>
-                    <li>model.php파일에 도서 상세 정보를 가져오는 함수 만들기</li>
+                    <li>model.php파일에 도서 상세 정보를 가져오는 함수(getBookById()) 만들기</li>
                     <li>books.php에 상세정보 버튼 만들기</li>
-                    <li> 상세정보 페이지 만들기(book.php 만들기)</li>
+                    <li> 도서 상세정보 페이지 만들기(book.php 만들기)</li>
                 </ul>
-            <li>Form 태그 - 도서등록 페이지 만들기</li>
+            <li>Chapter7. Form 태그 - 도서등록 페이지 만들기</li>
                 <ul>
-                    <li>menu.php에 도서등록 추가</li>
+                    <li>menu.php에 도서등록 메뉴 추가</li>
                     <li>addBook.php 파일 추가</li>
-                    <li>model.php에 신규도서 데이터를 저장하는 함수 만들기</li>
+                    <li>model.php에 신규도서 데이터를 저장하는 함수(addBook()) 만들기</li>
                     <li>processAddBook.php파일 만들기(신규도서 등록 페이지)</li>
                 </ul>
         </ol>
