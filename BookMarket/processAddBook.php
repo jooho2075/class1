@@ -1,4 +1,61 @@
 <?php
+    function filterBookId($field) {
+        $field = filter_var(trim($field));
+
+        if(filter_var($field, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^ISBN[0-9]{4,12}$/")))) {
+            return $field;
+        } else {
+            return FALSE;
+        }
+    }
+
+    function filterName($field) {
+        $field = filter_var(trim($field));
+
+        if(strlen($field) >= 4 && strlen($field) <= 50) {
+            return $field;
+        } else {
+            return FALSE;
+        }
+    }
+
+    function filterPrice($field) {
+        if(filter_var(trim($field), FILTER_VALIDATE_INT) || filter_var(trim($field), FILTER_VALIDATE_FLOAT)) {
+            return $field;
+        } else {
+            return FALSE;
+        }
+    }
+
+    function filterPriceFloat($field) {
+        $field = filter_var(trim($field));
+
+        if(filter_var($field, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[\d]*\.?[\d]{0,2}$/")))) {
+            return $field;
+        } else {
+            return FALSE;
+        }
+    }
+
+    function filterStock($field) {
+        if(filter_var(trim($field), FILTER_VALIDATE_INT)) {
+            return $field;
+        } else {
+            return FALSE;
+        }
+    }
+
+    function filterDescription($field) {
+        $field = filter_var(trim($field));
+        if(!empty($field) && strlen($field) >= 80) {
+            return $field;
+        } else {
+            return FALSE;
+        }
+    }
+
+    $bookIdErr = $nameErr = $unitPriceErr = $descriptionErr = $unitsInStockErr = $bookImageErr = "";
+
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         // new book 추가 isset()
         // 28~36 : 폼 페이지에서 입력된 값을 얻어오도록 요청 파라미터명(bookId, name, unitPrice...)으로
@@ -14,21 +71,72 @@
         $condition = $_POST["condition"];
         $filename = $_FILES['bookImage']['name'];
 
-        $target_path = "resources/images/";
-
-        $ext = pathinfo($filename, PATHINFO_EXTENSION); // PATHINFO_EXTENSION -> 확장자 뽑아주는 역할, $ext가 확장자명이 됨
-        $filename = $bookId.".".$ext;
-
-        if(move_uploaded_file($_FILES["bookImage"]["tmp_name"], $target_path .$filename)) {
-            $handle = fopen("domain.dat", "a"); // 파일 열기
-            $book_info = "$bookId | $name | $unitPrice | $author | $description | $category | $unitsInStock | $releaseDate | $condition | $filename";
-            fwrite($handle, "\n".$book_info);
-
-            fclose($handle);
-
-            Header("Location:books.php");
+        if(empty($bookId)) {
+            $bookIdErr = "도서코드를 입력하세요";
         } else {
-            echo "파일이 업로드되지 않았습니다. 다시 시도해 주세요!";
+            if(filterBookId($bookId) == FALSE) {
+                $bookIdErr = "ISBN과 숫자를 조합하여 5~12자까지 입력하세요";
+            }
         }
+
+        if(empty($name)) {
+            $nameErr = "도서명을 입력하세요";
+        } else {
+            if(filterName($name) == FALSE) {
+                $nameErr = "최소 4자에서 최대 50자까지 입력하세요";
+            }
+        }
+
+        if(empty($unitPrice)) {
+            $unitPriceErr = "가격을 입력하세요";
+        } else {
+            if(filterPrice($unitPrice) == FALSE) {
+                $unitPriceErr = "숫자만 입력하세요";
+            } else if(filterPrice($unitPrice) < 0) {
+                $unitPriceErr = "양수를 입력하세요";
+            } else {
+                $unitPriceErr = "소수점 둘째 자리까지만 입력하세요";
+            }
+        }
+
+        if(empty($unitsInStock)) {
+            $unitsInStockErr = "재고 수를 입력하세요";
+        } else {
+            if(filterStock($unitsInStock) == FALSE) {
+                $unitsInStockErr = "숫자만 입력하세요";
+            }
+        }
+
+        if(empty($description)) {
+            $descriptionErr = "상세설명을 입력하세요";
+        } else {
+            if(filterDescription($description) == FALSE) {
+                $descriptionErr = "최소 80자 이상 입력하세요";
+            }
+        }
+
+        if(empty($filename)) {
+            $bookImageErr = "업로드 파일을 입력하세요";
+        }
+
+        if($bookIdErr == "" &&  $nameErr =="" && $unitPriceErr == "" && $descriptionErr == "" && $unitsInStockErr == "" && $bookImageErr == "") {
+            $target_path = "resources/images/";
+
+            $ext = pathinfo($filename, PATHINFO_EXTENSION); // PATHINFO_EXTENSION -> 확장자 뽑아주는 역할, $ext가 확장자명이 됨
+            $filename = $bookId.".".$ext;
+
+            if(move_uploaded_file($_FILES["bookImage"]["tmp_name"], $target_path .$filename)) {
+                $handle = fopen("domain.dat", "a"); // 파일 열기
+                $book_info = "$bookId | $name | $unitPrice | $author | $description | $category | $unitsInStock | $releaseDate | $condition | $filename";
+                fwrite($handle, "\n".$book_info);
+    
+                fclose($handle);
+    
+                Header("Location:books.php");
+            } else {
+                echo "파일이 업로드되지 않았습니다. 다시 시도해 주세요!";
+            }
+        }
+        require "./addBook_error.php";
     }
 ?>
