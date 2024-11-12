@@ -35,8 +35,8 @@
   while(!feof($handle)){ 
 
     $array =  explode("|", fgets($handle));
+    
     $id = trim($array[0]);
-  
     $BookArray[$id]["name"] = trim($array[1]);
     $BookArray[$id]["unitPrice"] = trim($array[2]);
     $BookArray[$id]["author"] = trim($array[3]);
@@ -45,7 +45,8 @@
     $BookArray[$id]["unitsInStock"] = trim($array[6]);
     $BookArray[$id]["releaseDate"] =trim($array[7]);
     $BookArray[$id]["condition"] = trim($array[8]);
-    $BookArray[$id]["filename"] = trim($array[9]); 
+    $BookArray[$id]["filename"] = trim($array[9]);
+    $BookArray[$id]["quantity"] = trim($array[10]);
   }
 
   fclose($handle);

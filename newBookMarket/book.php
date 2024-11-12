@@ -2,7 +2,16 @@
 <html class="h-100" >   
   <title>도서 정보</title>
     <link href="./resources/css/bootstrap.min.css" rel="stylesheet"> 
-    <script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js" ></script>  
+    <script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js" ></script>
+    <script type="text/javascript">
+      function addToCart() {
+        if(confirm("도서를 장바구니에 추가하시겠습니까?")) { // confirm -> 질문을 하는 내용을 화면에 띄워줌
+          document.addForm.submit();
+        } else {
+          document.addForm.reset();
+        }
+      }
+    </script>
     <!-- Custom styles for this template -->
     </head>
   <body class="d-flex flex-column h-100">
@@ -46,8 +55,14 @@
           <p><b>분류</b> : <?php echo $book["category"]; ?> 
           <p><b>재고수</b> : <?php echo $book["unitsInStock"]; ?> 
 		      <p><?php  echo $book["unitPrice"]; ?>원
-          <p><a href="#" class="btn btn-info"> 도서주문 &raquo;</a> 
-					<a href="./books.php" class="btn btn-secondary"> 도서목록 &raquo;</a>    
+
+          <p>
+            <form name="addForm" action="./addCart.php?id=<?php $id; ?>" method="post">
+              <a href="#" class="btn btn-info" onclick="addToCart()"> 도서 주문 &raquo;</a>
+              <a href="./cart.php" class="btn btn-warning"> 장바구니 &raquo;</a>
+              <a href="./books.php" class="btn btn-secondary"> 도서목록 &raquo;</a>
+            </form>
+          </p> 
         <!-- </div> -->
       </div>    
     </div>
