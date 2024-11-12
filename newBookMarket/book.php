@@ -9,6 +9,15 @@
   <?php 
     require "./model.php";    
     require "./menu.php";
+
+    try {
+      $id = null;
+      if(isset($_GET['id']))
+        $id = $_GET['id'];
+      $book = getBookById($id);
+      if($book == null) {
+        throw new Exception();
+      }
   ?>
 <br>
  <main>
@@ -44,8 +53,12 @@
     </div>
 
 </main>
-<?php     
+  <?php
+    }
+    catch(Exception $e) {
+      require "./exceptionNoBookId.php";
+    }
     require "./footer.php";
-?>
+  ?>
 </body>
 </html>
