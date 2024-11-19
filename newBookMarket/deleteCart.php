@@ -8,6 +8,7 @@
         return;
     }
 
+    // session_unset();도 동일하게 동작함
     session_destroy();
 
     header("Location:cart.php");

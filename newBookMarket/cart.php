@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>도서 목록</title>
     <link href="./resources/css/bootstrap.min.css" rel="stylesheet"> 
-    <script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js" ></script>
+    <script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body class="d-flex flex-column h-100">
     <?php
@@ -21,17 +21,18 @@
                     <p class="col-md-8 fs-4">CartList</p>
                 </div>
             </div>
+
             <div class="row align-items-md-stretch text-center">
                 <?php
                     session_start();
-                    $cartId = session_id();
+                    $cartId = session_id(); // session id 값을 읽어 옴
                 ?>
                 <div class="col-md-12">
                     <div class="p-5">
                         <table width="100%">
                             <tr>
-                            <td align="left"><a href="./deleteCart.php?cartId=<?=$cartId?>" class="btn btn-danger">삭제하기</a></td>
-                            <td align="right"><a href="./shippingInfo.php?cartId=<?=$cartId?>" class="btn btn-success">주문하기</a></td>
+                            <td style="text-align:left"><a href="./deleteCart.php?cartId=<?=$cartId?>" class="btn btn-danger">삭제하기</a></td>
+                            <td style="text-align:right"><a href="./shippingInfo.php?cartId=<?=$cartId?>" class="btn btn-success">주문하기</a></td>
                             </tr>
                         </table>
                     </div>
@@ -45,8 +46,8 @@
                                 <th>비고</th>
                             </tr>
                             <?php
-                                $sum = 0;
-                                $cartList = "";
+                                $sum = 0; // total 금액
+                                $cartList = ""; // 전체 리스트를 가져옴
                                 if(isset($_SESSION["cartlist"])) {
                                     $cartList = $_SESSION["cartlist"];
                                 }
@@ -54,21 +55,24 @@
                                 if($cartList == null) {
                                     $count = 0;
                                 } else {
-                                    $count = $count($carList);
+                                    $count = count($cartList);
                                 }
 
                                 for($i = 0; $i < $count; $i++, next($cartList)) {
+                                    // 도서 리스트 하나씩 출력하기
                                     $id = key($cartList);
                                     $book = $cartList[$id];
                                     $total = $book["unitPrice"] * $book["quantity"];
                                     $sum = $sum + $total;
                             ?>
                             <tr>
-                                <td width="20%"><?php $id ?> - <?php $book["name"]?></td>
-                                <td width="10%"><?php $book["unitPrice"] ?></td>
-                                <td width="10%"><?php $book["quantity"] ?></td>
-                                <td width="10%"><?php $total ?></td>
-                                <td width="10%"><a href="./removeCart.php?id=<?=$id ?>" class="badge text-bg-danger">삭제</a></td>
+                                <td width="20%"><?=$id ?> - <?=$book["name"]?></td>
+                                <td width="10%"><?=$book["unitPrice"] ?></td>
+                                <td width="10%"><?=$book["quantity"] ?></td>
+                                <td width="10%"><?=$total ?></td>
+                                <td width="10%">
+                                    <a href="./removeCart.php?id=<?=$id ?>" class="badge text-bg-danger">삭제</a>
+                                </td>
                             </tr>
                             <?php
                                 }
@@ -77,14 +81,14 @@
                                 <th></th>
                                 <th></th>
                                 <th>총액</th>
-                                <th><?php $sum ?></th>
+                                <th><?=$sum ?></th>
                                 <th></th>
                             </tr>
                         </table>
                     </div>
 
                     <div class="col-md-2">
-                        <a href=".books.php" class="btn btn-secondary"> &laquo; 쇼핑 계속하기</a>
+                        <a href="./books.php" class="btn btn-secondary"> &laquo; 쇼핑 계속하기</a>
                     </div>
                 </div>
             </div>

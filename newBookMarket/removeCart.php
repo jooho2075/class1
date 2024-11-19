@@ -11,14 +11,14 @@
     $book = getBookById($bookId);
 
     if($book == null) {
-        header("Location:exceptionBookId.php");
+        header("Location:exceptionNoBookId.php");
     }
 
     $cartList = $_SESSION["cartlist"];
     $count = count($_SESSION["cartlist"]);
     $goodsList = $_SESSION["cartlist"];
 
-    for($i = 0; $i < $count; $i++) {
+    for($i = 0; $i < $count; $i++) { // 상품 리스트 하나씩 확인하기
         $goodsid = key($goodsList);
         $goods = $goodsList[$goodsid];
         if($goodsid == $bookId) {

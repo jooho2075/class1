@@ -20,9 +20,8 @@
     require "./menu.php";
 
     try {
-      $id = null;
-      if(isset($_GET['id']))
-        $id = $_GET['id'];
+      $id = $_GET["id"];
+
       $book = getBookById($id);
       if($book == null) {
         throw new Exception();
@@ -37,10 +36,6 @@
        <p class="col-md-8 fs-4">BookInfo</p>
       </div>
    </div>
-   <?php
-         $id = $_GET["id"];  
-         $book =  getBookById($id) ;
-    ?>
    <div class="row align-items-md-stretch">      
       <div class="col-md-5">
         <img src="./resources/images/<?= $book['filename']; ?>" style="width:70%">
@@ -57,7 +52,7 @@
 		      <p><?php  echo $book["unitPrice"]; ?>원
 
           <p>
-            <form name="addForm" action="./addCart.php?id=<?php $id; ?>" method="post">
+            <form name="addForm" action="./addCart.php?id=<?php echo $id; ?>" method="post">
               <a href="#" class="btn btn-info" onclick="addToCart()"> 도서 주문 &raquo;</a>
               <a href="./cart.php" class="btn btn-warning"> 장바구니 &raquo;</a>
               <a href="./books.php" class="btn btn-secondary"> 도서목록 &raquo;</a>
