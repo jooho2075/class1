@@ -16,16 +16,21 @@
     </head>
   <body class="d-flex flex-column h-100">
   <?php 
-    require "./model.php";    
+    // require "./model.php";    
     require "./menu.php";
+    require "./dbconn.php";
 
     try {
       $id = $_GET["id"];
 
-      $book = getBookById($id);
-      if($book == null) {
+      $sql = "SELECT * FROM book Where b_id ='".$id."'";
+
+      $result = mysqli_query($conn, $sql);
+
+      if(mysqli_num_rows($result) <= 0)
         throw new Exception();
-      }
+      else
+        $row = mysqli_fetch_array($result);
   ?>
 <br>
  <main>
@@ -38,18 +43,18 @@
    </div>
    <div class="row align-items-md-stretch">      
       <div class="col-md-5">
-        <img src="./resources/images/<?= $book['filename']; ?>" style="width:70%">
+        <img src="./resources/images/<?php echo $row['b_fileName']; ?>" style="width: 70%">
       </div>
       <div class="col-md-6">        
         <!-- <div class="h-100 p-5"> -->
-          <h2><?php  echo $book["name"]; ?></h2>
-          <p><?php  echo $book["description"]; ?> 
+          <h2><?php echo $row["b_name"]; ?></h2>
+          <p><?php echo $row["b_description"]; ?> 
           <p><b>도서코드 : </b>  <span class="badge text-bg-danger"> <?php echo $id; ?></span>
-          <p><b>저자</b> : <?php echo $book["author"]; ?>
-          <p><b>출판일</b> : <?php echo $book["releaseDate"]; ?> 
-          <p><b>분류</b> : <?php echo $book["category"]; ?> 
-          <p><b>재고수</b> : <?php echo $book["unitsInStock"]; ?> 
-		      <p><?php  echo $book["unitPrice"]; ?>원
+          <p><b>저자</b> : <?php echo $row["b_author"]; ?>
+          <p><b>출판일</b> : <?php echo $row["b_releaseDate"]; ?> 
+          <p><b>분류</b> : <?php echo $row["b_category"]; ?> 
+          <p><b>재고수</b> : <?php echo $row["b_unitsInStock"]; ?> 
+		      <p><?php echo $row["b_unitPrice"]; ?>원
 
           <p>
             <form name="addForm" action="./addCart.php?id=<?php echo $id; ?>" method="post">
@@ -64,6 +69,8 @@
 
 </main>
   <?php
+    mysqli_free_result($result);
+    mysqli_close($conn);
     }
     catch(Exception $e) {
       require "./exceptionNoBookId.php";

@@ -7,9 +7,9 @@
     <!-- Custom styles for this template -->
 </head>
 <body class="d-flex flex-column h-100">
-<?php
-    require "./model.php";     
+<?php    
     require "./menu.php";
+    require "./dbconn.php";
 ?> 
 <br>
  <main>
@@ -22,27 +22,28 @@
    </div>
  
    <div class="row align-items-md-stretch text-center">
- <?php
-      $listOfBooks = getAllBooks();
-      for ($i = 0; $i < count($listOfBooks); $i++) {
-        $id = key($listOfBooks);
-        $book = $listOfBooks[$id];    
- 	      next($listOfBooks);  
+  <?php
+    $sql = "SELECT * from book";
+    $result = mysqli_query($conn, $sql);
+    while($row = mysqli_fetch_array($result)) {
   ?>
     <div class="col-md-4">
       <div class="h-100 p-5">
-        <img src="./resources/images/<?= $book['filename']; ?>" style="width:100%">
-        <h2><?php echo $book["name"]; ?></h2>
-        <p><?php  echo $book["author"]. " | ".$book["releaseDate"]; ?> 		 
-        <p><?php  echo mb_substr($book["description"], 0, 90, 'utf-8')."..."; ?> 
-        <p><?php  echo $book["unitPrice"]; ?>원   
-        <p> <a href="./book.php?id=<?php echo $id; ?>"><button class="btn btn-outline-secondary" type="button">상세 정보</button></a>       
+        <img src="./resources/images/<?php echo $row['b_fileName']; ?>" style="width:100%">
+        <h2><?php echo $row["b_name"]; ?></h2>
+        <p><?php  echo $row["b_author"]. " | ".$row["b_releaseDate"]; ?> 		 
+        <p><?php  echo mb_substr($row["b_description"], 0, 90, 'utf-8')."..."; ?> 
+        <p><?php  echo $row["b_unitPrice"]; ?>원   
+        <p> <a href="./book.php?id=<?php echo $row['b_id']; ?>">
+          <button class="btn btn-outline-secondary" type="button">상세 정보</button></a>       
       </div>
     </div>
     
   <?php
     }
-   ?>     
+    mysqli_free_result($result);
+    mysqli_close($conn);
+  ?>     
     </div>
 
 </main>
