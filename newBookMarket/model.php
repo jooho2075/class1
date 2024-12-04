@@ -18,6 +18,7 @@
     $BookArray[$id]["condition"] = trim($array[8]);
     $BookArray[$id]["filename"] = trim($array[9]);
     $BookArray[$id]["quantity"] = trim($array[10]); // 주문 수량을 이용하려는 목적
+    // trim()함수를 사용해 장바구니에 담긴 도서의 개수를 가져와 전역변수 $BookArray에 저장
   }
 
   fclose($handle);

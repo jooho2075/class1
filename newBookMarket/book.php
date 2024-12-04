@@ -3,7 +3,7 @@
   <title>도서 정보</title>
     <link href="./resources/css/bootstrap.min.css" rel="stylesheet"> 
     <script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js" ></script>
-    <script type="text/javascript">
+    <script type="text/javascript"> // 자바스크립트로 장바구니에 등록하기 위한 핸들러 함수 addCart() 작성
       function addToCart() {
         if(confirm("도서를 장바구니에 추가하시겠습니까?")) { // confirm -> 질문을 하는 내용을 화면에 띄워줌
           document.addForm.submit();
@@ -20,7 +20,7 @@
     require "./menu.php";
     require "./dbconn.php";
 
-    try {
+    try { // 도서id에 대해 예외가 발생했을 때 해당 예외 처리 페이지를 출력
       $id = $_GET["id"];
 
       $sql = "SELECT * FROM book Where b_id ='".$id."'";
@@ -43,7 +43,7 @@
    </div>
    <div class="row align-items-md-stretch">      
       <div class="col-md-5">
-        <img src="./resources/images/<?php echo $row['b_fileName']; ?>" style="width: 70%">
+        <img src="./resources/images/<?php echo $row['b_fileName']; ?>" style="width: 70%"> <!--이미지 추가-->
       </div>
       <div class="col-md-6">        
         <!-- <div class="h-100 p-5"> -->
@@ -57,9 +57,9 @@
 		      <p><?php echo $row["b_unitPrice"]; ?>원
 
           <p>
-            <form name="addForm" action="./addCart.php?id=<?php echo $id; ?>" method="post">
-              <a href="#" class="btn btn-info" onclick="addToCart()"> 도서 주문 &raquo;</a>
-              <a href="./cart.php" class="btn btn-warning"> 장바구니 &raquo;</a>
+            <form name="addForm" action="./addCart.php?id=<?php echo $id; ?>" method="post"><!--name:addForm, action 속성을 설정-->
+              <a href="#" class="btn btn-info" onclick="addToCart()"> 도서 주문 &raquo;</a><!--도서 주문 클릭하면 addToCart() 실행되도록 onclick 속성 설정-->
+              <a href="./cart.php" class="btn btn-warning"> 장바구니 &raquo;</a> <!--장바구니 클릭 시 웹 페이지 cart.php실행-->
               <a href="./books.php" class="btn btn-secondary"> 도서목록 &raquo;</a>
             </form>
           </p> 

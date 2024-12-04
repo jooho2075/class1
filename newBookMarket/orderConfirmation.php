@@ -12,6 +12,7 @@
     require "./model.php";
     require "./menu.php";
 
+    // 쿠키 객체를 통해 정보를 얻어오도록 $_COOKIE 작성
     $shipping_cartId = $_COOKIE["Shipping_cartId"];
     $shipping_name = $_COOKIE["Shipping_name"];
     $shipping_shippingDate = $_COOKIE["Shipping_shippingDate"];
@@ -35,7 +36,7 @@
             <div>
               <h1>영수증</h1>
             </div>
-
+            <!--얻어 온 정보 출력-->
             <div class="row justify-content-between">
               <div class="col-4" style="text-align:left">
                 <strong>배송 주소</strong> <br> 성명 : <?= $shipping_name?><br>우편번호 : <?= $shipping_zipCode?><br> 주소 : <?= $shipping_addressName?>(<?= $shipping_country?>)<br>
@@ -53,7 +54,7 @@
                   <th>소계</th>
                 </tr>
                 <?php
-                  session_start();
+                  session_start(); // 세션에 저장된 장바구니 정보를 얻어오도록 $_SESSION["cartlist"]작성하고 장바구니에 저장된 모든 도서 목록을 하나씩 가져와 출력
                   $sum = 0;
                   $cartList = "";
                   if(isset($_SESSION["cartList"]))
@@ -80,8 +81,8 @@
                 ?>
                 <tr>
                   <th></th>
-                  <th></th>
-                  <th><strong>총액: </strong></th>
+                  <th></th>0
+                  <th><strong>총액: </strong></th> <!--장바구니 총액 출력-->
                   <th><strong><?=$sum?> </strong></th>
                 </tr>
               </table>

@@ -1,10 +1,19 @@
 <!doctype html>
 <html class="h-100" >   
 <head>
-  <title>도서 목록</title>
+  <title>도서 편집</title>
     <link href="./resources/css/bootstrap.min.css" rel="stylesheet"> 
     <script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js" ></script>   
     <!-- Custom styles for this template -->
+    <script>
+      function deleteConfirm() {
+        if(confirm("해당 도서를 삭제합니다!!") == true) {
+          location.href = './deleteBook.php?id='+id;
+        } else {
+          return;
+        }
+      }
+    </script>
 </head>
 <body class="d-flex flex-column h-100">
 <?php    
@@ -16,26 +25,40 @@
  <div class="container py-5">
    <div class="p-5 mb-4 bg-body-tertiary rounded-3">
      <div class="container-fluid py-5">
-       <h1 class="display-5 fw-bold">도서 목록</h1>
+       <h1 class="display-5 fw-bold">도서 편집</h1>
        <p class="col-md-8 fs-4">BookList</p>
       </div>
    </div>
  
    <div class="row align-items-md-stretch text-center">
   <?php
+    $edit = $_GET["edit"]; // update 또는 delete의 값이 들어올 수 있음
+
     $sql = "SELECT * from book";
     $result = mysqli_query($conn, $sql);
     while($row = mysqli_fetch_array($result)) {
   ?>
     <div class="col-md-4">
       <div class="h-100 p-5">
-        <img src="./resources/images/<?php echo $row['b_fileName']; ?>" style="width:100%"> <!--이미지 추가-->
+        <img src="./resources/images/<?php echo $row['b_fileName']; ?>" style="width:100%">
         <h2><?php echo $row["b_name"]; ?></h2>
         <p><?php  echo $row["b_author"]. " | ".$row["b_releaseDate"]; ?> 		 
         <p><?php  echo mb_substr($row["b_description"], 0, 90, 'utf-8')."..."; ?> 
         <p><?php  echo $row["b_unitPrice"]; ?>원   
-        <p> <a href="./book.php?id=<?php echo $row['b_id']; ?>">
-          <button class="btn btn-outline-secondary" type="button">상세 정보</button></a>       
+        <p>
+          <?php
+            if($edit == "update") {
+          ?>
+          <a href="./updateBook.php?id=<?=$row["b_id"]; ?>">
+            <button class="btn btn-success" type="button">수정 &raquo;</button>
+          </a>
+          <?php
+            } else if($edit == "delete") {
+          ?>
+          <a href="" onclick="deleteConfirm('<?= $row['b_id']; ?>')" class="btn btn-danger" role="button">삭제 &raquo;</a>
+          <?php
+            }
+          ?>
       </div>
     </div>
     

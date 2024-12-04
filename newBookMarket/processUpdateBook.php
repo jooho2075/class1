@@ -1,6 +1,6 @@
 <?php
-
-function filterBookId($field){ // 도서 아이디가 정규 표현식과 일치하는지 검사하는 함수
+require "./dbconn.php";
+function filterBookId($field){   
   $field = filter_var(trim($field)); // trim->앞뒤 공백 제거   
  
   if(filter_var($field, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^ISBN[0-9]{4,11}$/")))){ // FILTER_VALIDATE_REGEXP->정규 표현식이 맞는지 검사
@@ -10,7 +10,7 @@ function filterBookId($field){ // 도서 아이디가 정규 표현식과 일치
   }
 }    
 
-function filterName($field){ // 도서명의 문자길이가 맞는지 확인
+function filterName($field){
 
   $field = filter_var(trim($field));    
 
@@ -21,7 +21,7 @@ function filterName($field){ // 도서명의 문자길이가 맞는지 확인
   }
 }   
 
-function filterPrice($field){ // 도서 가격이 유효한 정수 또는 실수인지 검사
+function filterPrice($field){       
   if(filter_var(trim($field), FILTER_VALIDATE_INT) || filter_var(trim($field), FILTER_VALIDATE_FLOAT) ){
       return $field;
   } else{
@@ -40,7 +40,7 @@ function filterPriceFloat($field){
   }
 }   
 
-function filterStock($field){ // 재고 수가 유효한 정수인지 확인
+function filterStock($field){
  
   if(filter_var(trim($field), FILTER_VALIDATE_INT)){
       return $field;
@@ -49,7 +49,7 @@ function filterStock($field){ // 재고 수가 유효한 정수인지 확인
   }
 }   
 
-function filterDescription($field){ // 상세 설명의 문자길이가 80자 이상인지 확인
+function filterDescription($field){
      
   $field = filter_var(trim($field));
   if(!empty($field) && strlen($field) >= 80){
@@ -123,33 +123,35 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
       }
   }  
 
-
+  /*
   if ( empty(  $filename )){
       $bookImageErr = "업로드파일을 입력하세요"; 
   }
-
+  */
 
   if($bookIdErr =="" && $nameErr =="" && $unitPriceErr =="" && $descriptionErr =="" && $unitsInStockErr =="" && $bookImageErr =="")
   {
-    $target_path = "resources/images/"; // 서버 파일 저장 경로
-    $ext = pathinfo($filename, PATHINFO_EXTENSION); // pathinfo()함수로 파일 경로에서 확장자를 얻어와 폼 페이지에서 입력한 도서 아이디와 확장자를 연결하여 새로운 이미지 파일명 만듬
+    $target_path = "resources/images/";
+    $ext = pathinfo($filename, PATHINFO_EXTENSION);
     $filename = $bookId.".".$ext;
-    
-    // move_uploaded_file()함수 : 업로드한 이미지를 서버에 저장
+  
     if ( move_uploaded_file($_FILES["bookImage"]["tmp_name"], $target_path . $filename)) {
-      require "./dbconn.php";
-
-      $sql = "INSERT INTO book (b_id, b_name, b_unitPrice, b_author, b_description, 
-              b_category, b_unitsInStock, b_releaseDate, b_condition, b_fileName) VALUES
-              ('$bookId', '$name', '$unitPrice', '$author', '$description', '$category', '$unitsInStock',
-              '$releaseDate', '$condition', '$filename')";
-      if(mysqli_query($conn, $sql))
-        Header("Location:books.php"); 
-      else{  
-        echo "파일이 업로드되지 않았습니다. 다시 시도해 주세요!";  
-      }  
+      $sql = "UPDATE book SET b_name='$name', b_unitPrice=$unitPrice, b_author='$author', 
+      b_description='$description', b_category='$category', b_unitsInStock='$unitsInStock',
+      b_releaseDate='$releaseDate', b_condition='$condition', b_fileName='$filename'
+      WHERE b_id='$bookId'";
     }
-    require "./addBook_Error.php";
+    else {
+      $sql = "UPDATE book SET b_name='$name', b_unitPrice=$unitPrice, b_author='$author', 
+      b_description='$description', b_category='$category', b_unitsInStock='$unitsInStock',
+      b_releaseDate='$releaseDate', b_condition='$condition'
+      WHERE b_id='$bookId'";
+    }
+    if(mysqli_query($conn, $sql))
+      Header("Location:editBooks.php?edit=update");
+    
+    mysqli_close($conn);
   }
+    require "./updateBook_Error.php";
   }
 ?>

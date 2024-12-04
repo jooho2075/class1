@@ -11,6 +11,7 @@
   <?php
     require "./menu.php";
 
+    // 쿠키 객체를 얻어와 쿠키 정보를 얻어오도록 $_COOKIE작성
     $shipping_cartId = $_COOKIE["Shipping_cartId"];
     $shipping_name = $_COOKIE["Shipping_name"];
     $shipping_shippingDate = $_COOKIE["Shipping_shippingDate"];
@@ -43,6 +44,7 @@
         session_start();
         session_unset();
 
+        // 쿠키에 저장된 배송 정보 삭제를 위한 setcookie() 함수의 속성값을 빈 문자열, 유효기간 0으로 표현
         setcookie("Shipping_cartId", "", 0);
         setcookie("Shipping_name", "", 0);
         setcookie("Shipping_shippingDate", "", 0);

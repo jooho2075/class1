@@ -25,8 +25,8 @@
             <div class="row align-items-md-stretch">
                 <div class="col-md-12">
                     <div class="h-100 p-5">
-                        <form name="newBook" action="./processShippingInfo.php" method="post">
-                            <input type="hidden" name="cartId" value="<?=$cartId ?>">
+                        <form name="newBook" action="./processShippingInfo.php" method="post"> <!--입력 양식에 입력된 데이터를 서버로 전송해 폼 데이터 처리하도록 action 속성값, method 방식 지정-->
+                            <input type="hidden" name="cartId" value="<?=$cartId ?>"> <!--name 속성값을 cartId로 작성, value 속성값은 $_GET이용하여 장바구니 아이디인 cartId를 전송받도록 함-->
                             <div class="mb-3 row">
                                 <label class="col-sm-2">성명</label>
                                 <div class="col-sm-3">

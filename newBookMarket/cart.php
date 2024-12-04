@@ -24,7 +24,7 @@
 
             <div class="row align-items-md-stretch text-center">
                 <?php
-                    session_start();
+                    //session_start();
                     $cartId = session_id(); // session id 값을 읽어 옴
                 ?>
                 <div class="col-md-12">
@@ -32,7 +32,7 @@
                         <table width="100%">
                             <tr>
                             <td style="text-align:left"><a href="./deleteCart.php?cartId=<?=$cartId?>" class="btn btn-danger">삭제하기</a></td>
-                            <td style="text-align:right"><a href="./shippingInfo.php?cartId=<?=$cartId?>" class="btn btn-success">주문하기</a></td>
+                            <td style="text-align:right"><a href="./shippingInfo.php?cartId=<?=$cartId?>" class="btn btn-success">주문하기</a></td> <!--주문하기 클릭해서 배송 정보페이지(shippingInfo.php)로 이동-->
                             </tr>
                         </table>
                     </div>
@@ -48,7 +48,7 @@
                             <?php
                                 $sum = 0; // total 금액
                                 $cartList = ""; // 전체 리스트를 가져옴
-                                if(isset($_SESSION["cartlist"])) {
+                                if(isset($_SESSION["cartlist"])) { // 장바구니인 cartlist에 등록된 모든 도서를 가져오도록 $_SESSION["cartlist"] 작성
                                     $cartList = $_SESSION["cartlist"];
                                 }
 
@@ -65,13 +65,13 @@
                                     $total = $book["unitPrice"] * $book["quantity"];
                                     $sum = $sum + $total;
                             ?>
-                            <tr>
+                            <tr><!--도서 가격과 수량을 곱한 금액 출력-->
                                 <td width="20%"><?=$id ?> - <?=$book["name"]?></td>
                                 <td width="10%"><?=$book["unitPrice"] ?></td>
                                 <td width="10%"><?=$book["quantity"] ?></td>
                                 <td width="10%"><?=$total ?></td>
                                 <td width="10%">
-                                    <a href="./removeCart.php?id=<?=$id ?>" class="badge text-bg-danger">삭제</a>
+                                    <a href="./removeCart.php?id=<?=$id ?>" class="badge text-bg-danger">삭제</a> <!--삭제 버튼 출력-->
                                 </td>
                             </tr>
                             <?php
@@ -81,7 +81,7 @@
                                 <th></th>
                                 <th></th>
                                 <th>총액</th>
-                                <th><?=$sum ?></th>
+                                <th><?=$sum ?></th><!--장바구니에 등록된 모든 도서의 총액 출력-->
                                 <th></th>
                             </tr>
                         </table>
