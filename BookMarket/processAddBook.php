@@ -126,13 +126,23 @@
             $filename = $bookId.".".$ext;
 
             if(move_uploaded_file($_FILES["bookImage"]["tmp_name"], $target_path .$filename)) {
+                require "./dbconn.php";
+                
+                $sql = "INSERT INTO book (b_id, b_name, b_unitPrice, b_author, b_description,
+                b_category, b_unitsInStock, b_releaseDate, b_condition, b_fileName) VALUES 
+                ('$bookId', '$name', '$unitPrice', '$author', '$description', '$category', 
+                $unitsInStock', '$releaseDate', '$condition', '$filename')";
+
+                if(mysqli_query($conn, $sql))
+                    Header("Location:books.php");
+                
+                /*
                 $handle = fopen("domain.dat", "a"); // 파일 열기
                 $book_info = "$bookId | $name | $unitPrice | $author | $description | $category | $unitsInStock | $releaseDate | $condition | $filename";
                 fwrite($handle, "\n".$book_info);
-    
+                
                 fclose($handle);
-    
-                Header("Location:books.php");
+                */
             } else {
                 echo "파일이 업로드되지 않았습니다. 다시 시도해 주세요!";
             }

@@ -51,6 +51,7 @@
     $BookArray[$id]["releaseDate"] = trim($array[7]);
     $BookArray[$id]["condition"] = trim($array[8]);
     $BookArray[$id]["filename"] = trim($array[9]); // 추가된 부분
+    $BookArray[$id]["quantity"] = trim($array[10]);
   }
   fclose($handle);
 

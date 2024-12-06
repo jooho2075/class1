@@ -33,7 +33,7 @@
                 <div class="h-100 p-5"> <!--접속 일시-->
                     <h2><?php echo $tagline ?></h2>
                     <?php
-                    header("Refresh:5"); // refresh the time every 5 seconds
+                    //header("Refresh:5"); // refresh the time every 5 seconds
                     date_default_timezone_set("Asia/Seoul");
                     echo "현재 접속 일시 : ". date("Y/m/d H:i:s A"); // 연/월/일 시:분:초 AM(PM) 형태로 반환되도록 date()함수를 Y/m/d H:i:s A형식으로 작성
                     ?>

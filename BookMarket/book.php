@@ -4,12 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./resources/css/bootstrap.min.css"  rel="stylesheet">
+    <script type="text/javascript">
+        function addToCart() {
+            if(confirm("도서를 장바구니에 추가하시겠습니까?")) {
+                document.addForm.submit();
+            } else {
+                document.addForm.reset();
+            }
+        }
+    </script>
     <title>도서 정보</title>
 </head>
 <body class="d-flex flex-column h-100">
     <?php
-        require "./model.php";
-        require "./menu.php"
+        //require "./model.php";
+        require "./menu.php";
+        require "./dbconn.php";
+
+        try {
+            $id = $_GET["id"];
+
+            $sql = "SELECT * FROM book WHERE b_id = '".$id."'";
+
+            $result = mysqli_query($con, $sql);
+            if(mysqli_num_rows($result) <= 0)
+                throw new Exception();
+            else $row = mysqli_fetch_aray($result);
+
+            /*
+            $book = getBookById($id);
+            if($book == null) {
+                throw new Exception();
+            }
+            */
     ?>
     <br>
 
@@ -27,26 +54,34 @@
             ?>
             <div class="row align-items-md-stretch">
                 <div class="col-md-5">
-                    <img src="./resources/images/<?php echo $book['filename']; ?>" style="width: 70%">
+                    <img src="./resources/images/<?php echo $row['b_fileName']; ?>" style="width: 70%">
                 </div>
                 <div class="col-md-6">
-                    <h2><?php echo $book["name"]; ?></h2> <!--31~38 : $book에 저장된 도서명, 도서코드...dmf cnffur-->
-                    <p><?php echo $book["description"];?></p>
+                    <h2><?php echo $row["b_name"]; ?></h2> <!--31~38 : $book에 저장된 도서명, 도서코드...dmf cnffur-->
+                    <p><?php echo $row["b_description"];?></p>
                     <p><b>도서코드 : </b><span class="badge text-bg-danger"><?php echo $id;?></span></p>
-                    <p><b>저자</b> : <?php echo $book["author"];?></p>
-                    <p><b>출판일</b> : <?php echo $book["releaseDate"];?></p>
-                    <p><b>분류</b> : <?php echo $book["category"];?></p>
-                    <p><b>재고</b> : <?php echo $book["unitsInStock"];?></p>
-                    <p><?php echo $book["unitPrice"]; ?>원</p>
+                    <p><b>저자</b> : <?php echo $row["b_author"];?></p>
+                    <p><b>출판일</b> : <?php echo $row["b_releaseDate"];?></p>
+                    <p><b>분류</b> : <?php echo $row["b_category"];?></p>
+                    <p><b>재고</b> : <?php echo $row["b_unitsInStock"];?></p>
+                    <p><?php echo $row["b_unitPrice"]; ?>원</p>
                     <p>
-                        <a href="#" class="btn btn-info">도서주문 &raquo;</a> <!--도서주문 버튼-->
-                        <a href="./books.php" class="btn btn-secondary">도서목록 &raquo;</a> <!--도서목록 버튼-->
+                        <form name="addForm" action="./addCart.php?id=<?php echo $id; ?>" method="post">
+                            <a href="#" class="btn btn-info"> 도서주문 &raquo;</a> <!--도서주문 버튼-->
+                            <a href="./cart.php" class="btn btn-warning"> 장바구니 &raquo;</a>
+                            <a href="./books.php" class="btn btn-secondary"> 도서목록 &raquo;</a> <!--도서목록 버튼-->
+                        </form>
                     </p>
                 </div>
             </div>
         </div>
     </main>
     <?php
+    mysqli_free_result($result);
+    mysqli_close($conn);
+    } catch(Exception $e) {
+        require "./exceptionNoBookId.php";
+    }
         require "./footer.php";
     ?>
     
