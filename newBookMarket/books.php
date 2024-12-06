@@ -23,8 +23,9 @@
  
    <div class="row align-items-md-stretch text-center">
   <?php
+    // boook 테이블의 필드값을 가져오기 위한 SELECT문 작성
     $sql = "SELECT * from book";
-    $result = mysqli_query($conn, $sql);
+    $result = mysqli_query($conn, $sql); // mysqli_query() : 쿼리 실행함수
     while($row = mysqli_fetch_array($result)) {
   ?>
     <div class="col-md-4">
@@ -41,8 +42,8 @@
     
   <?php
     }
-    mysqli_free_result($result);
-    mysqli_close($conn);
+    mysqli_free_result($result); // mysqli_free_result() : 메모리 해제
+    mysqli_close($conn); // mysqli_close() : 데이터 베이스 연결 해제
   ?>     
     </div>
 

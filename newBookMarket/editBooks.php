@@ -5,8 +5,8 @@
     <link href="./resources/css/bootstrap.min.css" rel="stylesheet"> 
     <script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js" ></script>   
     <!-- Custom styles for this template -->
-    <script>
-      function deleteConfirm() {
+    <script type="text/javascript">
+      function deleteConfirm(id) { // JS로 도서 삭제 여부 확인하는 함수 deleteConfirm()작성
         if(confirm("해당 도서를 삭제합니다!!") == true) {
           location.href = './deleteBook.php?id='+id;
         } else {
@@ -18,7 +18,7 @@
 <body class="d-flex flex-column h-100">
 <?php    
     require "./menu.php";
-    require "./dbconn.php";
+    require "./dbconn.php"; // DB연결을 위한 외부파일 포함
 ?> 
 <br>
  <main>
@@ -34,6 +34,7 @@
   <?php
     $edit = $_GET["edit"]; // update 또는 delete의 값이 들어올 수 있음
 
+    // book 테이블의 필드값을 가져오기 위한 SELECT문 작성
     $sql = "SELECT * from book";
     $result = mysqli_query($conn, $sql);
     while($row = mysqli_fetch_array($result)) {
@@ -53,9 +54,10 @@
             <button class="btn btn-success" type="button">수정 &raquo;</button>
           </a>
           <?php
-            } else if($edit == "delete") {
+            } else if($edit == "delete") { // 요청 파라미터 edit의 값이 delete면 삭제버튼 출력하도록 작성
           ?>
           <a href="" onclick="deleteConfirm('<?= $row['b_id']; ?>')" class="btn btn-danger" role="button">삭제 &raquo;</a>
+            <!-- 삭제 버튼 클릭 시 deleteConfirm 함수가 실행되도록 onclick속성 작성-->
           <?php
             }
           ?>

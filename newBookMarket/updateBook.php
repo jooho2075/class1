@@ -16,7 +16,7 @@
 
     $sql = "SELECT * FROM book WHERE b_id = '$id'";
     $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_array($result);
+    $row = mysqli_fetch_array($result); // 특정 도서 ID에서 검색된 레코드를 가져오도록 mysqli_fetch_array()함수 작성
   ?>
 <br>
  <main>

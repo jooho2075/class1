@@ -137,12 +137,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // move_uploaded_file()함수 : 업로드한 이미지를 서버에 저장
     if ( move_uploaded_file($_FILES["bookImage"]["tmp_name"], $target_path . $filename)) {
-      require "./dbconn.php";
-
+      require "./dbconn.php"; // require "./dbconn.php"추가
+      
+      // book 테이블의 새로운 필드값 삽입을 위한 INSERT문 작성
       $sql = "INSERT INTO book (b_id, b_name, b_unitPrice, b_author, b_description, 
               b_category, b_unitsInStock, b_releaseDate, b_condition, b_fileName) VALUES
               ('$bookId', '$name', '$unitPrice', '$author', '$description', '$category', '$unitsInStock',
               '$releaseDate', '$condition', '$filename')";
+      
+      // 쿼리문 실행을 위한 함수 작성, 쿼리문이 성공하면 book.php페이지로 이동
       if(mysqli_query($conn, $sql))
         Header("Location:books.php"); 
       else{  
