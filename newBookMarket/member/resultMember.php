@@ -39,19 +39,19 @@
         <div class="col-md-12">
             <div class="h-100 p-5">   
             <?php
-            if ($msg != null) {
-                if ($msg=="0")
-                    echo "<h2 class='alert alert-danger'>회원정보가 수정되었습니다.</h2>";
+                if ($msg != null) {
+                    if ($msg=="0")
+                        echo "<h2 class='alert alert-danger'>회원정보가 수정되었습니다.</h2>";
 
-                else if ($msg=="1")
-                    echo " <h2 class='alert alert-danger'>회원가입을 축하드립니다.</h2>";
-                else if ($msg=="2") {                    
-                    $loginId = $_SESSION["sessionID"];
-                    echo "  <h2 class='alert alert-danger'>" . $loginId . "님 환영합니다</h2>";
+                    else if ($msg=="1")
+                        echo " <h2 class='alert alert-danger'>회원가입을 축하드립니다.</h2>";
+                    else if ($msg=="2") {                    
+                        $loginId = $_SESSION["sessionID"];
+                        echo "  <h2 class='alert alert-danger'>" . $loginId . "님 환영합니다</h2>";
+                    }
+                    else if ($msg=="3")
+                        echo " <h2 class='alert alert-danger'>회원정보가 삭제되었습니다.</h2>";
                 }
-                else if ($msg=="3")
-                    echo " <h2 class='alert alert-danger'>회원정보가 삭제되었습니다.</h2>";
-            }
             ?>
 
             </div>                

@@ -9,7 +9,7 @@
 <body class="d-flex flex-column h-100">
 <?php    
     require "./menu.php";
-    require "./dbconn.php";
+    require "./dbconn.php"; // phpMyAdmin에 연결해서 require "./model.php"는 삭제했음
 ?> 
 <br>
  <main>
@@ -25,11 +25,11 @@
   <?php
     // boook 테이블의 필드값을 가져오기 위한 SELECT문 작성
     $sql = "SELECT * from book";
-    $result = mysqli_query($conn, $sql); // mysqli_query() : 쿼리 실행함수
+    $result = mysqli_query($conn, $sql); // mysqli_query() : 쿼리 실행함수, $conn은 dbconn.php에서 변수로 설정됨
     while($row = mysqli_fetch_array($result)) {
   ?>
     <div class="col-md-4">
-      <div class="h-100 p-5">
+      <div class="h-100 p-5"><!--$row뒤의 이름은 sql문의 이름과 동일함-->
         <img src="./resources/images/<?php echo $row['b_fileName']; ?>" style="width:100%"> <!--이미지 추가-->
         <h2><?php echo $row["b_name"]; ?></h2>
         <p><?php  echo $row["b_author"]. " | ".$row["b_releaseDate"]; ?> 		 

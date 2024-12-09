@@ -2,6 +2,7 @@
 
    require "../dbconn.php";
 
+   // $~의 이름이 phpMyAdmin의 이름과 같아야 함
     $id = trim($_POST["id"]);
     $password = trim($_POST["password"]);
     $name = trim($_POST["name"]);

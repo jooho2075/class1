@@ -27,7 +27,7 @@
                     <div class="mb-3 row">
                         <label class="col-sm-2">도서코드</label>
                         <div class="col-sm-3">
-                            <input type="text" id="bookId" name="bookId" class="form-control" >
+                            <input type="text" id="bookId" name="bookId" class="form-control" ><!--id이름은 validation.js파일과 동일하게-->
                         </div>
                     </div>
                     <div class="mb-3 row">

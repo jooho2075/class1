@@ -13,6 +13,7 @@
     require "./menu.php";
 
     // 쿠키 객체를 통해 정보를 얻어오도록 $_COOKIE 작성
+    // processShippingInfo.php와 동일한 명칭 사용
     $shipping_cartId = $_COOKIE["Shipping_cartId"];
     $shipping_name = $_COOKIE["Shipping_name"];
     $shipping_shippingDate = $_COOKIE["Shipping_shippingDate"];

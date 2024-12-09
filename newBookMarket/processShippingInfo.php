@@ -4,6 +4,7 @@
     // 주문자 정보를 전달받도록 $_POST작성, setcookie()함수 이용
     setcookie("Shipping_cartId", $_POST["cartId"], time()+24*60*60); // 24시간*60분*60초
 
+    // shippingInfo.php의 name과 동일해야 함!
     setcookie("Shipping_name", $_POST["name"], time()+24*60*60);
     setcookie("Shipping_shippingDate", $_POST["shippingDate"], time()+24*60*60);
     setcookie("Shipping_country", $_POST["country"], time()+24*60*60);
